@@ -1,0 +1,203 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-7);
+  width: 100%;
+  max-width: var(--content-max);
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-light);
+  color: var(--col-text-primary);
+  text-shadow: var(--shadow-text);
+  letter-spacing: var(--ls-tight);
+  align-self: flex-start;
+}
+
+.scene {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+.targetRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.targetLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-light);
+  color: var(--col-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+.targetValue {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-light);
+  color: var(--col-text-primary);
+  text-shadow: var(--shadow-text);
+  min-width: 32px;
+  text-align: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 1px dashed var(--col-border-input);
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.targetValue:hover {
+  color: var(--col-text-lit);
+  border-bottom-color: var(--col-text-primary);
+}
+
+.targetValue:active {
+  opacity: 0.7;
+  transition-duration: 80ms;
+}
+
+.targetInput {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-light);
+  color: var(--col-text-primary);
+  text-align: center;
+  width: 72px;
+  background: rgba(255, 252, 248, 0.96);
+  border: none;
+  border-bottom: 2px solid var(--col-border-input);
+  outline: none;
+  padding: 0 var(--sp-1);
+  -moz-appearance: textfield;
+}
+.targetInput::-webkit-outer-spin-button,
+.targetInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.arrayWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.arrayRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.searchPartition {
+  position: absolute;
+  top: -6px;
+  height: 68px; /* CELL_SIZE + 12px padding */
+  border-radius: var(--r-lg);
+  border: 2px solid rgba(115, 75, 52, 0.55);
+  background: rgba(115, 75, 52, 0.06);
+  transition:
+    left 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.metrics {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.footerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.presetLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-light);
+  color: var(--col-text-muted);
+  letter-spacing: var(--ls-wide);
+  margin-right: var(--sp-1);
+}
+
+.treeWrap {
+  position: relative;
+}
+
+.treeSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.treeEdge {
+  stroke: rgba(255, 248, 235, 0.72);
+  stroke-width: 1.5;
+  transition: stroke 300ms ease, stroke-width 300ms ease;
+}
+
+.treeEdgeTraversed {
+  stroke: rgba(115, 75, 52, 0.70);
+  stroke-width: 2;
+  transition: stroke 300ms ease, stroke-width 300ms ease;
+}
+
+.treeNode {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--col-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-light);
+  user-select: none;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: var(--transition-surface);
+}
+
+.treeNode_idle {
+  background: var(--col-surface);
+  color: var(--col-text-body);
+  box-shadow: var(--shadow-rest);
+}
+
+.treeNode_current {
+  background: var(--col-surface-lit);
+  border: 2px solid rgba(115, 75, 52, 0.85);
+  color: var(--col-text-lit);
+  box-shadow: var(--shadow-lit);
+}
+
+.treeNode_visited {
+  background: rgba(166, 116, 88, 0.22);
+  border-color: var(--col-border-done);
+  color: var(--col-text-done);
+  box-shadow: var(--shadow-done);
+}
+
+.treeNode_found {
+  background: rgba(115, 75, 52, 0.22);
+  border: 2px solid rgba(115, 75, 52, 0.85);
+  color: var(--col-text-primary);
+  box-shadow: var(--shadow-lit);
+}

@@ -1,0 +1,20 @@
+.root {
+  min-height: 36px;
+  text-align: center;
+}
+
+.status {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-regular);
+  color: var(--col-text-primary);
+  letter-spacing: var(--ls-tight);
+  transition: color var(--dur-normal) ease;
+}
+
+.detail {
+  margin-top: var(--sp-2);
+  font-size: var(--text-md);
+  font-weight: var(--fw-regular);
+  color: var(--col-text-body);
+  letter-spacing: var(--ls-normal);
+}

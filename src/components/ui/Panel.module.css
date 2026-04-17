@@ -1,0 +1,9 @@
+.panel {
+  background: var(--col-surface);
+  border: 1px solid var(--col-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: var(--sp-9) var(--sp-10) var(--sp-8);
+}

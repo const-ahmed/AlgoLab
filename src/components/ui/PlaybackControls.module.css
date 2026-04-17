@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.sep {
+  width: 1px;
+  height: 22px;
+  background: rgba(var(--col-shadow-dark), 0.20);
+  margin: 0 var(--sp-1);
+}

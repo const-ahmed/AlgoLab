@@ -1,0 +1,92 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-7);
+  width: 100%;
+  max-width: var(--content-max);
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-light);
+  color: var(--col-text-primary);
+  text-shadow: var(--shadow-text);
+  letter-spacing: var(--ls-tight);
+  align-self: flex-start;
+}
+
+.scene {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+/* Array wrapper - relative container for absolutely positioned cells */
+.arrayWrap {
+  position: relative;
+}
+
+/* Inline edit input */
+.editInput {
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  background: rgba(255, 252, 248, 0.96);
+  border: 2px solid var(--col-border-input);
+  border-radius: var(--r-lg);
+  font-family: var(--font-sans);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-light);
+  color: var(--col-text-primary);
+  outline: none;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(var(--col-shadow-dark), 0.16);
+  /* hide number spinners */
+  -moz-appearance: textfield;
+}
+.editInput::-webkit-outer-spin-button,
+.editInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.metrics {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.footerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 28px;
+}
+
+.mergeGroup {
+  position: absolute;
+  top: -6px;
+  height: calc(100% + 12px);
+  border-radius: var(--r-lg);
+  border: 2px solid rgba(115, 75, 52, 0.55);
+  background: rgba(115, 75, 52, 0.06);
+  transition:
+    left 260ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 260ms cubic-bezier(0.4, 0, 0.2, 1),
+    background 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mergeGroupActive {
+  border-color: rgba(115, 75, 52, 0.95);
+  background: rgba(115, 75, 52, 0.13);
+  box-shadow: 0 0 0 1px rgba(115, 75, 52, 0.20), 0 2px 8px rgba(115, 75, 52, 0.15);
+}
