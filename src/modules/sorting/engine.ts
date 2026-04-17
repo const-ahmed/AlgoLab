@@ -34,7 +34,7 @@ export function computeBubbleSortFrames(input: number[]): SortFrame[] {
       if (a[j] > a[j + 1]) {
         ;[a[j], a[j + 1]] = [a[j + 1], a[j]]
         swaps++
-        frames.push({ arr: [...a], comparing: [j, j + 1], sorted: [...sorted], statusSymbol: '↕', statusDetail: `Swapped ${vL} and ${vR}.`, comparisons, swaps })
+        frames.push({ arr: [...a], comparing: [j, j + 1], sorted: [...sorted], statusSymbol: '⇄', statusDetail: `Swapped ${vL} and ${vR}.`, comparisons, swaps })
         swapped = true
       }
       frames.push({ arr: [...a], comparing: null, sorted: [...sorted], statusSymbol: '', statusDetail: '', comparisons, swaps })
@@ -79,7 +79,7 @@ export function computeSelectionSortFrames(input: number[]): SortFrame[] {
     if (minIdx !== i) {
       ;[a[i], a[minIdx]] = [a[minIdx], a[i]]
       swaps++
-      frames.push({ arr: [...a], comparing: [i, minIdx], sorted: [...sorted], statusSymbol: '↕', statusDetail: `Swapped ${a[minIdx]} and ${a[i]} - minimum placed at position ${i}.`, comparisons, swaps })
+      frames.push({ arr: [...a], comparing: [i, minIdx], sorted: [...sorted], statusSymbol: '⇄', statusDetail: `Swapped ${a[minIdx]} and ${a[i]} - minimum placed at position ${i}.`, comparisons, swaps })
     } else {
       frames.push({ arr: [...a], comparing: null, sorted: [...sorted], statusSymbol: '', statusDetail: `${a[i]} is already the minimum - no swap needed.`, comparisons, swaps })
     }
@@ -115,7 +115,7 @@ export function computeInsertionSortFrames(input: number[]): SortFrame[] {
       if (prev > curr) {
         ;[a[j - 1], a[j]] = [a[j], a[j - 1]]
         swaps++
-        frames.push({ arr: [...a], comparing: [j - 1, j], sorted: [...sorted], statusSymbol: '↕', statusDetail: `Swapped ${curr} and ${prev}.`, comparisons, swaps })
+        frames.push({ arr: [...a], comparing: [j - 1, j], sorted: [...sorted], statusSymbol: '⇄', statusDetail: `Swapped ${curr} and ${prev}.`, comparisons, swaps })
         j--
       } else {
         break
@@ -165,7 +165,7 @@ export function computeMergeSortFrames(input: number[]): SortFrame[] {
             const vL = a[k - 1], vR = a[k]
             ;[a[k - 1], a[k]] = [a[k], a[k - 1]]
             swaps++
-            push([k - 1, k], '↕', `Swapped ${vL} and ${vR}.`, range)
+            push([k - 1, k], '⇄', `Swapped ${vL} and ${vR}.`, range)
           }
           i++
           j++
@@ -216,7 +216,7 @@ export function computeQuickSortFrames(input: number[]): SortFrame[] {
         if (i !== j) {
           ;[a[i], a[j]] = [a[j], a[i]]
           swaps++
-          frames.push({ arr: [...a], comparing: [i, j], sorted: [...sorted], statusSymbol: '↕', statusDetail: `Swapped ${a[j]} and ${a[i]}.`, comparisons, swaps })
+          frames.push({ arr: [...a], comparing: [i, j], sorted: [...sorted], statusSymbol: '⇄', statusDetail: `Swapped ${a[j]} and ${a[i]}.`, comparisons, swaps })
         }
       }
     }

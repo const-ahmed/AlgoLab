@@ -2,11 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { computeSortFrames } from './engine'
 import type { SortAlgorithm, SortFrame } from './engine'
 import { CELL_STRIDE, SWAP_DURATION } from './SortCell'
+import { SPEED_MS } from '../../components/ui/SpeedSlider'
 
 const DEFAULT_ARRAY = [5, 3, 8, 1, 6, 2, 7, 4]
-const PLAY_INTERVAL = 500
 
-export default function useSorting(algorithm: SortAlgorithm = 'bubble') {
+export default function useSorting(algorithm: SortAlgorithm = 'bubble', speed = 2) {
   const [initArr, setInitArr] = useState<number[]>(DEFAULT_ARRAY)
   const [frames, setFrames] = useState<SortFrame[]>([])
   const [frameIdx, setFrameIdx] = useState(0)
@@ -85,9 +85,9 @@ export default function useSorting(algorithm: SortAlgorithm = 'bubble') {
       setIsPlaying(false)
       return
     }
-    playTimer.current = setTimeout(() => { goToFrame(frameIdx + 1) }, PLAY_INTERVAL)
+    playTimer.current = setTimeout(() => { goToFrame(frameIdx + 1) }, Math.max(SWAP_DURATION + 60, SPEED_MS[speed]))
     return () => { if (playTimer.current) clearTimeout(playTimer.current) }
-  }, [isPlaying, frameIdx, frames.length, goToFrame])
+  }, [isPlaying, frameIdx, frames.length, goToFrame, speed])
 
   const play = useCallback(() => {
     if (frameIdx >= frames.length - 1) return

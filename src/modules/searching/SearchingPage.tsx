@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import PlaybackControls from '../../components/ui/PlaybackControls'
+import { DEFAULT_SPEED } from '../../components/ui/SpeedSlider'
 import ExplanationPanel from '../../components/ui/ExplanationPanel'
 import MetricChip from '../../components/ui/MetricChip'
 import Button from '../../components/ui/Button'
@@ -34,6 +35,7 @@ const TREE_H = 240
 
 export default function SearchingPage() {
   const [algorithm, setAlgorithm] = useState<SearchAlgorithm>('linear')
+  const [speed, setSpeed] = useState(DEFAULT_SPEED)
   const [editingTarget, setEditingTarget] = useState(false)
   const [editTargetValue, setEditTargetValue] = useState('')
   const targetInputRef = useRef<HTMLInputElement>(null)
@@ -41,7 +43,7 @@ export default function SearchingPage() {
   const {
     arr, target, currentFrame, frameIdx, isPlaying, atStart, atEnd,
     goToFrame, togglePlay, pause, updateTarget, reset,
-  } = useSearching(algorithm)
+  } = useSearching(algorithm, speed)
 
   const isTreeAlgorithm = algorithm === 'dfs' || algorithm === 'bfs'
   const treeFrame  = (currentFrame && 'kind' in currentFrame && currentFrame.kind === 'tree')
@@ -185,6 +187,8 @@ export default function SearchingPage() {
           onBack={() => goToFrame(frameIdx - 1)}
           onPlay={togglePlay}
           onForward={() => goToFrame(frameIdx + 1)}
+          speed={speed}
+          onSpeedChange={setSpeed}
         />
 
         {currentFrame && currentFrame.comparisons > 0 && (

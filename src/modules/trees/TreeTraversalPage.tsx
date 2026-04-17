@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PlaybackControls from '../../components/ui/PlaybackControls'
+import { DEFAULT_SPEED } from '../../components/ui/SpeedSlider'
 import ExplanationPanel from '../../components/ui/ExplanationPanel'
 import MetricChip from '../../components/ui/MetricChip'
 import Button from '../../components/ui/Button'
@@ -29,8 +30,9 @@ const TREE_H = 240
 
 export default function TreeTraversalPage() {
   const [algorithm, setAlgorithm] = useState<TraversalAlgorithm>('preorder')
+  const [speed, setSpeed] = useState(DEFAULT_SPEED)
 
-  const { currentFrame, frameIdx, isPlaying, atStart, atEnd, goToFrame, togglePlay, pause, reset } = useTreeTraversal(algorithm)
+  const { currentFrame, frameIdx, isPlaying, atStart, atEnd, goToFrame, togglePlay, pause, reset } = useTreeTraversal(algorithm, speed)
 
   function handleAlgorithmChange(id: string) {
     pause()
@@ -115,6 +117,8 @@ export default function TreeTraversalPage() {
           onBack={() => goToFrame(frameIdx - 1)}
           onPlay={togglePlay}
           onForward={() => goToFrame(frameIdx + 1)}
+          speed={speed}
+          onSpeedChange={setSpeed}
         />
 
         {currentFrame && currentFrame.steps > 0 && (

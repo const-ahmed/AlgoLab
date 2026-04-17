@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { computeTraversalFrames } from './engine'
 import type { TraversalAlgorithm, TraversalFrame } from './engine'
+import { SPEED_MS } from '../../components/ui/SpeedSlider'
 
-const PLAY_INTERVAL = 700
-
-export default function useTreeTraversal(algorithm: TraversalAlgorithm = 'preorder') {
+export default function useTreeTraversal(algorithm: TraversalAlgorithm = 'preorder', speed = 2) {
   const [frames, setFrames] = useState<TraversalFrame[]>([])
   const [frameIdx, setFrameIdx] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -39,9 +38,9 @@ export default function useTreeTraversal(algorithm: TraversalAlgorithm = 'preord
       setIsPlaying(false)
       return
     }
-    playTimer.current = setTimeout(() => goToFrame(frameIdx + 1), PLAY_INTERVAL)
+    playTimer.current = setTimeout(() => goToFrame(frameIdx + 1), SPEED_MS[speed])
     return () => { if (playTimer.current) clearTimeout(playTimer.current) }
-  }, [isPlaying, frameIdx, frames.length, goToFrame])
+  }, [isPlaying, frameIdx, frames.length, goToFrame, speed])
 
   const togglePlay = useCallback(() => {
     if (isPlaying) { pause() } else {

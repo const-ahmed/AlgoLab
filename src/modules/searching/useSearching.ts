@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { computeSearchFrames } from './engine'
 import type { SearchAlgorithm, AnySearchFrame } from './engine'
+import { SPEED_MS } from '../../components/ui/SpeedSlider'
 
 const DEFAULT_ARR = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29]
 const DEFAULT_TARGET = 17
-const PLAY_INTERVAL = 600
 
-export default function useSearching(algorithm: SearchAlgorithm = 'linear') {
+export default function useSearching(algorithm: SearchAlgorithm = 'linear', speed = 2) {
   const [arr] = useState<number[]>(DEFAULT_ARR)
   const [target, setTarget] = useState(DEFAULT_TARGET)
   const [frames, setFrames] = useState<AnySearchFrame[]>([])
@@ -43,9 +43,9 @@ export default function useSearching(algorithm: SearchAlgorithm = 'linear') {
       setIsPlaying(false)
       return
     }
-    playTimer.current = setTimeout(() => goToFrame(frameIdx + 1), PLAY_INTERVAL)
+    playTimer.current = setTimeout(() => goToFrame(frameIdx + 1), SPEED_MS[speed])
     return () => { if (playTimer.current) clearTimeout(playTimer.current) }
-  }, [isPlaying, frameIdx, frames.length, goToFrame])
+  }, [isPlaying, frameIdx, frames.length, goToFrame, speed])
 
   const togglePlay = useCallback(() => {
     if (isPlaying) { pause() } else {

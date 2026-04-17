@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import PlaybackControls from '../../components/ui/PlaybackControls'
+import { DEFAULT_SPEED } from '../../components/ui/SpeedSlider'
 import ExplanationPanel from '../../components/ui/ExplanationPanel'
 import MetricChip from '../../components/ui/MetricChip'
 import Button from '../../components/ui/Button'
@@ -29,13 +30,14 @@ const USE_WHEN: Record<SortAlgorithm, string> = {
 
 export default function SortingPage() {
   const [algorithm, setAlgorithm] = useState<SortAlgorithm>('bubble')
+  const [speed, setSpeed] = useState(DEFAULT_SPEED)
 
   const {
     initArr, currentFrame, positions,
     isPlaying, busy, atStart, atEnd,
     goToFrame, frameIdx, togglePlay, pause,
     editValue, addElement, removeElement, randomise, reset,
-  } = useSorting(algorithm)
+  } = useSorting(algorithm, speed)
 
   const [editingPos, setEditingPos] = useState<number | null>(null)
   const [editValue_, setEditValue_] = useState('')
@@ -144,6 +146,8 @@ export default function SortingPage() {
           onPlus={() => { pause(); addElement() }}
           canMinus={n > 2}
           canPlus={n < 9}
+          speed={speed}
+          onSpeedChange={setSpeed}
         />
 
         {currentFrame && (currentFrame.comparisons > 0 || currentFrame.swaps > 0) && (
