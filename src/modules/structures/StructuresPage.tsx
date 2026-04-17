@@ -562,6 +562,7 @@ function HashTableViz() {
   const [pairIdx, setPairIdx] = useState(0);
   const [phase, setPhase] = useState<HTPhase>("idle");
   const [activeKey, setActiveKey] = useState<string>("");
+  const [activeVal, setActiveVal] = useState<string>("");
   const [rawHash, setRawHash] = useState<number | null>(null);
   const [bucket, setBucket] = useState<number | null>(null);
   const [litKey, setLitKey] = useState<string | null>(null);
@@ -752,9 +753,9 @@ function HashTableViz() {
         <div
           className={`${styles.htStep} ${phase === "store" ? styles.htStepActive : ""}`}
         >
-          <span className={styles.htStepLabel}>bucket</span>
+          <span className={styles.htStepLabel}>store</span>
           <span className={styles.htStepValue}>
-            {bucket !== null ? bucket : "-"}
+            {activeKey && activeVal ? `"${activeKey}":"${activeVal}"` : bucket !== null ? bucket : "-"}
           </span>
         </div>
       </div>
