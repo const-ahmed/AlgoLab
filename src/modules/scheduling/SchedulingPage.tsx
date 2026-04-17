@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import PlaybackControls from '../../components/ui/PlaybackControls'
+import { DEFAULT_SPEED } from '../../components/ui/SpeedSlider'
 import ExplanationPanel from '../../components/ui/ExplanationPanel'
 import Button from '../../components/ui/Button'
 import AlgorithmTabs from '../../components/ui/AlgorithmTabs'
@@ -59,6 +60,7 @@ const TOTAL_TIME = DEFAULT_PROCESSES.reduce((s, p) => s + p.burst, 0) + 2
 
 export default function SchedulingPage() {
   const [algorithm, setAlgorithm] = useState<SchedulingAlgorithm>('fcfs')
+  const [speed, setSpeed] = useState(DEFAULT_SPEED)
   const [openWhat, setOpenWhat] = useState(false)
   const [showTermsModal, setShowTermsModal] = useState(false)
 
@@ -69,7 +71,7 @@ export default function SchedulingPage() {
     return () => window.removeEventListener('keydown', handler)
   }, [showTermsModal])
 
-  const { currentFrame, frameIdx, isPlaying, atStart, atEnd, goToFrame, togglePlay, pause, reset } = useScheduling(algorithm)
+  const { currentFrame, frameIdx, isPlaying, atStart, atEnd, goToFrame, togglePlay, pause, reset } = useScheduling(algorithm, speed)
 
   function handleAlgorithmChange(id: string) {
     pause()
@@ -246,6 +248,8 @@ export default function SchedulingPage() {
           onBack={() => goToFrame(frameIdx - 1)}
           onPlay={togglePlay}
           onForward={() => goToFrame(frameIdx + 1)}
+          speed={speed}
+          onSpeedChange={setSpeed}
         />
 
         {atEnd && (

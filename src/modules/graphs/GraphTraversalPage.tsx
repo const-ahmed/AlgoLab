@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PlaybackControls from '../../components/ui/PlaybackControls'
+import { DEFAULT_SPEED } from '../../components/ui/SpeedSlider'
 import ExplanationPanel from '../../components/ui/ExplanationPanel'
 import MetricChip from '../../components/ui/MetricChip'
 import Button from '../../components/ui/Button'
@@ -22,8 +23,9 @@ const USE_WHEN: Record<GraphAlgorithm, string> = {
 
 export default function GraphTraversalPage() {
   const [algorithm, setAlgorithm] = useState<GraphAlgorithm>('dfs')
+  const [speed, setSpeed] = useState(DEFAULT_SPEED)
 
-  const { currentFrame, frameIdx, isPlaying, atStart, atEnd, goToFrame, togglePlay, pause, reset } = useGraphTraversal(algorithm)
+  const { currentFrame, frameIdx, isPlaying, atStart, atEnd, goToFrame, togglePlay, pause, reset } = useGraphTraversal(algorithm, speed)
 
   function handleAlgorithmChange(id: string) {
     pause()
@@ -115,6 +117,8 @@ export default function GraphTraversalPage() {
           onBack={() => goToFrame(frameIdx - 1)}
           onPlay={togglePlay}
           onForward={() => goToFrame(frameIdx + 1)}
+          speed={speed}
+          onSpeedChange={setSpeed}
         />
 
         {currentFrame && currentFrame.steps > 0 && (
